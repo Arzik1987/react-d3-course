@@ -1,1 +1,2 @@
-short notes for the assignment and the GitHub Pages URL once deployed.
+preview:
+python3 -m http.server 8000
