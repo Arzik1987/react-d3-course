@@ -1,0 +1,1 @@
+short notes for the assignment and the GitHub Pages URL once deployed.
