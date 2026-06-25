@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "build:b": "npm --prefix docs/B-card-collection run build",
+    "assemble:pages": "shx rm -rf .pages && shx mkdir -p .pages/A-homepage .pages/B-card-collection && shx cp docs/index.html .pages/index.html && shx cp docs/styles.css .pages/styles.css && shx cp -r docs/A-homepage/* .pages/A-homepage/ && shx cp -r docs/B-card-collection/dist/* .pages/B-card-collection/",
+    "deploy": "npm run build:b && npm run assemble:pages && gh-pages -d .pages"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "shx": "^0.4.0"
+  }
+}
