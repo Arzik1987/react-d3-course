@@ -1,7 +1,10 @@
 
-function Card({ title, text, linkLabel, linkHref }) {
+function Card({ title, text, tag, tagStyle, metaTags = [] }) {
 const styles = {
     card: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
         width: '100%',
         boxSizing: 'border-box',
         padding: 24,
@@ -14,8 +17,8 @@ const styles = {
     },
     title: {
         margin: '0 0 12px',
-        fontSize: 28,
-        lineHeight: 1.1,
+        fontSize: 22,
+        lineHeight: 1.2,
     },
     text: {
         margin: '0 0 18px',
@@ -23,24 +26,43 @@ const styles = {
         lineHeight: 1.6,
         color: '#52606d',
     },
-    link: {
+    tag: {
+        alignSelf: 'flex-start',
         display: 'inline-block',
-        padding: '8px 16px',
+        padding: '6px 12px',
         borderRadius: 9999,
-        backgroundColor: '#c44900',
-        color: 'white',
-        textDecoration: 'none',
         fontSize: 16,
     },
+    tagsRow: {
+        marginTop: 'auto',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 8,
+        alignItems: 'flex-start',
+    },
+    metaTag: {
+        display: 'inline-block',
+        padding: '6px 12px',
+        borderRadius: 9999,
+        backgroundColor: 'rgba(255, 255, 255, 0.78)',
+        color: '#1f2933',
+        border: '1px solid rgba(31, 41, 51, 0.12)',
+        fontSize: 16,
+  },
 }
 
 return (
         <article style={styles.card}>
         <h2 style={styles.title}>{title}</h2>
-        <p style={styles.text}>{text}</p>
-        <a href={linkHref} style={styles.link}>
-            {linkLabel}
-        </a>
+        {text ? <p style={styles.text}>{text}</p> : null}
+        <div style={styles.tagsRow}>
+            {metaTags.map((item) => (
+            <div key={item} style={styles.metaTag}>
+                {item}
+            </div>
+            ))}
+        <div style={{ ...styles.tag, ...tagStyle }}>{tag}</div>
+        </div>
         </article>
     )
 }

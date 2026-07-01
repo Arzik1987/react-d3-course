@@ -13,7 +13,7 @@ export default function App() {
 
   const cardsStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 2fr))',
     gap: 24,
     width: '100%',
     maxWidth: 1100,
@@ -24,41 +24,50 @@ export default function App() {
   return (
     <main style={pageStyle}>
       <section style={cardsStyle}>
-        <Card
-          title="Borda Count"
-          text="A classical rank-based aggregation method that assigns points by position."
-          linkLabel="Read more"
-          linkHref="#"
-        />
-        <Card
-          title="Borda Count"
-          text="A classical rank-based aggregation method that assigns points by position."
-          linkLabel="Read more"
-          linkHref="#"
-        />
-        <Card
-          title="Borda Count"
-          text="A classical rank-based aggregation method that assigns points by position."
-          linkLabel="Read more"
-          linkHref="#"
-        />
-        <Card
-          title="Borda Count"
-          text="A classical rank-based aggregation method that assigns points by position."
-          linkLabel="Read more"
-          linkHref="#"
-        />
+        {aggregationMethods.map((method) => (
+      <Card
+        key={method.id}
+        title={method.name}
+        tag={method.input}
+        tagStyle={inputTagStyles[method.input] ?? defaultTagStyle}
+        metaTags={[
+          method.solver,
+          method.complexity,
+          method.maturity,
+          method.domain,
+          method.assumption,
+        ]}
+      />
+    ))}
       </section>
     </main>
   )
 }
 
+  const inputTagStyles = {
+    score: {
+      background: '#E8F7EE',
+      color: '#1E6B3A',
+    },
+    rank: {
+      background: '#EAF2FF',
+      color: '#1D4ED8',
+    },
+    pairwise: {
+      background: '#FFF1E8',
+      color: '#B45309',
+    },
+  }
 
+  const defaultTagStyle = {
+    background: '#F3F4F6',
+    color: '#374151',
+  }
 
 const aggregationMethods = [
   {
     id: 1,
-    name: "Mean quality aggregator",
+    name: "Mean quality",
     input: "score",
     solver: "direct-statistic",
     complexity: "polytime",
@@ -68,7 +77,7 @@ const aggregationMethods = [
   },
   {
     id: 2,
-    name: "Median quality aggregator",
+    name: "Median quality",
     input: "score",
     solver: "direct-statistic",
     complexity: "polytime",
@@ -78,7 +87,7 @@ const aggregationMethods = [
   },
   {
     id: 3,
-    name: "Geometric mean quality aggregator",
+    name: "Geometric mean quality",
     input: "score",
     solver: "direct-statistic",
     complexity: "polytime",
@@ -88,7 +97,7 @@ const aggregationMethods = [
   },
   {
     id: 4,
-    name: "Harmonic mean quality aggregator",
+    name: "Harmonic mean quality",
     input: "score",
     solver: "direct-statistic",
     complexity: "polytime",
@@ -98,7 +107,7 @@ const aggregationMethods = [
   },
   {
     id: 5,
-    name: "Rescaled mean quality aggregator",
+    name: "Rescaled mean quality",
     input: "score",
     solver: "direct-statistic",
     complexity: "polytime",
@@ -108,7 +117,7 @@ const aggregationMethods = [
   },
   {
     id: 6,
-    name: "Threshold quality aggregator",
+    name: "Threshold quality",
     input: "score",
     solver: "direct-counting",
     complexity: "polytime",
@@ -118,7 +127,7 @@ const aggregationMethods = [
   },
   {
     id: 7,
-    name: "Mean rank aggregator",
+    name: "Mean rank",
     input: "rank",
     solver: "direct-statistic",
     complexity: "polytime",
@@ -128,7 +137,7 @@ const aggregationMethods = [
   },
   {
     id: 8,
-    name: "Median rank aggregator",
+    name: "Median rank",
     input: "rank",
     solver: "direct-statistic",
     complexity: "polytime",
@@ -138,7 +147,7 @@ const aggregationMethods = [
   },
   {
     id: 9,
-    name: "Best rank count aggregator",
+    name: "Best rank count",
     input: "rank",
     solver: "direct-counting",
     complexity: "polytime",
@@ -148,7 +157,7 @@ const aggregationMethods = [
   },
   {
     id: 10,
-    name: "Worst rank count aggregator",
+    name: "Worst rank count",
     input: "rank",
     solver: "direct-counting",
     complexity: "polytime",
@@ -158,7 +167,7 @@ const aggregationMethods = [
   },
   {
     id: 11,
-    name: "Borda count aggregator",
+    name: "Borda count",
     input: "rank",
     solver: "direct-scoring",
     complexity: "polytime",
@@ -168,7 +177,7 @@ const aggregationMethods = [
   },
   {
     id: 12,
-    name: "Dowdall harmonic aggregator",
+    name: "Dowdall harmonic",
     input: "rank",
     solver: "direct-scoring",
     complexity: "polytime",
@@ -178,7 +187,7 @@ const aggregationMethods = [
   },
   {
     id: 13,
-    name: "Reciprocal rank fusion aggregator",
+    name: "Reciprocal rank fusion",
     input: "rank",
     solver: "direct-scoring",
     complexity: "polytime",
@@ -188,7 +197,7 @@ const aggregationMethods = [
   },
   {
     id: 14,
-    name: "Kemeny-Young aggregator",
+    name: "Kemeny-Young",
     input: "rank",
     solver: "exact-enumeration",
     complexity: "factorial-exact",
@@ -198,7 +207,7 @@ const aggregationMethods = [
   },
   {
     id: 15,
-    name: "Copeland pairwise aggregator",
+    name: "Copeland pairwise",
     input: "pairwise",
     solver: "direct-counting",
     complexity: "polytime",
@@ -208,7 +217,7 @@ const aggregationMethods = [
   },
   {
     id: 16,
-    name: "Margin row sum aggregator",
+    name: "Margin row sum",
     input: "pairwise",
     solver: "direct-scoring",
     complexity: "polytime",
@@ -218,7 +227,7 @@ const aggregationMethods = [
   },
   {
     id: 17,
-    name: "Minimax Condorcet aggregator",
+    name: "Minimax Condorcet",
     input: "pairwise",
     solver: "direct-counting",
     complexity: "polytime",
@@ -228,7 +237,7 @@ const aggregationMethods = [
   },
   {
     id: 18,
-    name: "Ranked Pairs Tideman aggregator",
+    name: "Ranked Pairs Tideman",
     input: "pairwise",
     solver: "greedy-dag",
     complexity: "polytime",
@@ -238,7 +247,7 @@ const aggregationMethods = [
   },
   {
     id: 19,
-    name: "Schulze beatpath aggregator",
+    name: "Schulze beatpath",
     input: "pairwise",
     solver: "path-closure",
     complexity: "polytime",
@@ -248,7 +257,7 @@ const aggregationMethods = [
   },
   {
     id: 20,
-    name: "Split cycle aggregator",
+    name: "Split cycle",
     input: "pairwise",
     solver: "path-closure",
     complexity: "polytime",
@@ -258,7 +267,7 @@ const aggregationMethods = [
   },
   {
     id: 21,
-    name: "River aggregator",
+    name: "River",
     input: "pairwise",
     solver: "greedy-dag",
     complexity: "polytime",
@@ -268,7 +277,7 @@ const aggregationMethods = [
   },
   {
     id: 22,
-    name: "Stable voting aggregator",
+    name: "Stable voting",
     input: "pairwise",
     solver: "recursive-elimination",
     complexity: "exponential-recursive",
@@ -278,7 +287,7 @@ const aggregationMethods = [
   },
   {
     id: 23,
-    name: "Simple stable voting aggregator",
+    name: "Simple stable voting",
     input: "pairwise",
     solver: "recursive-elimination",
     complexity: "exponential-recursive",
@@ -288,7 +297,7 @@ const aggregationMethods = [
   },
   {
     id: 24,
-    name: "Bradley-Terry aggregator",
+    name: "Bradley-Terry",
     input: "pairwise",
     solver: "mm-iteration",
     complexity: "iterative-polytime",
@@ -298,7 +307,7 @@ const aggregationMethods = [
   },
   {
     id: 25,
-    name: "Thurstone-Mosteller aggregator",
+    name: "Thurstone-Mosteller",
     input: "pairwise",
     solver: "gradient-ascent",
     complexity: "iterative-polytime",
@@ -308,7 +317,7 @@ const aggregationMethods = [
   },
   {
     id: 26,
-    name: "Poly rank aggregator",
+    name: "Poly rank",
     input: "pairwise",
     solver: "alternating-least-squares",
     complexity: "iterative-polytime",
@@ -318,7 +327,7 @@ const aggregationMethods = [
   },
   {
     id: 27,
-    name: "Markov chain aggregator",
+    name: "Markov chain",
     input: "pairwise",
     solver: "power-iteration",
     complexity: "iterative-polytime",
@@ -328,7 +337,7 @@ const aggregationMethods = [
   },
   {
     id: 28,
-    name: "Maximal lottery aggregator",
+    name: "Maximal lottery",
     input: "pairwise",
     solver: "fictitious-play",
     complexity: "iterative-polytime",
@@ -338,7 +347,7 @@ const aggregationMethods = [
   },
   {
     id: 29,
-    name: "Massey ranking aggregator",
+    name: "Massey ranking",
     input: "pairwise",
     solver: "gaussian-elimination",
     complexity: "polytime",
@@ -348,7 +357,7 @@ const aggregationMethods = [
   },
   {
     id: 30,
-    name: "Colley ranking aggregator",
+    name: "Colley ranking",
     input: "pairwise",
     solver: "gaussian-elimination",
     complexity: "polytime",
@@ -358,7 +367,7 @@ const aggregationMethods = [
   },
   {
     id: 31,
-    name: "Linear ordering problem aggregator",
+    name: "Linear ordering problem",
     input: "pairwise",
     solver: "exact-enumeration",
     complexity: "factorial-exact",
@@ -368,7 +377,7 @@ const aggregationMethods = [
   },
   {
     id: 32,
-    name: "Plackett-Luce aggregator",
+    name: "Plackett-Luce",
     input: "rank",
     solver: "mm-iteration",
     complexity: "iterative-polytime",
@@ -378,7 +387,7 @@ const aggregationMethods = [
   },
   {
     id: 33,
-    name: "PROMETHEE II aggregator",
+    name: "PROMETHEE II",
     input: "score",
     solver: "flow-computation",
     complexity: "polytime",
@@ -388,7 +397,7 @@ const aggregationMethods = [
   },
   {
     id: 34,
-    name: "ELECTRE III aggregator",
+    name: "ELECTRE III",
     input: "score",
     solver: "flow-computation",
     complexity: "polytime",
@@ -398,7 +407,7 @@ const aggregationMethods = [
   },
   {
     id: 35,
-    name: "TOPSIS aggregator",
+    name: "TOPSIS",
     input: "score",
     solver: "distance-to-ideal",
     complexity: "polytime",
@@ -408,7 +417,7 @@ const aggregationMethods = [
   },
   {
     id: 36,
-    name: "VIKOR aggregator",
+    name: "VIKOR",
     input: "score",
     solver: "distance-to-ideal",
     complexity: "polytime",
@@ -418,7 +427,7 @@ const aggregationMethods = [
   },
   {
     id: 37,
-    name: "Friedman-Nemenyi rank aggregator",
+    name: "Friedman-Nemenyi rank",
     input: "rank",
     solver: "direct-statistic",
     complexity: "polytime",
@@ -428,7 +437,7 @@ const aggregationMethods = [
   },
   {
     id: 38,
-    name: "DMAUC performance profile aggregator",
+    name: "DMAUC performance profile",
     input: "score",
     solver: "profile-integration",
     complexity: "polytime",
@@ -438,7 +447,7 @@ const aggregationMethods = [
   },
   {
     id: 39,
-    name: "DMLBO leave one out profile aggregator",
+    name: "DMLBO leave one out profile",
     input: "score",
     solver: "profile-integration",
     complexity: "polytime",
