@@ -121,8 +121,8 @@ export default function App() {
         instances, others on different ones. So what is the
         <strong> overall ranking of candidates</strong>, and which one is the
         winner? It turns out there are several dozen ways to answer this
-        question, and they are not always consistent with each other. This page
-        lists the ones I found and implemented with the help of Codex. You can
+        question, and they are not always consistent with each other.  This page lists the ones I found 
+        and <a href="https://github.com/Arzik1987/aggregation_methods">implemented</a> with the help of Codex. You can
         browse the collection of <strong>aggregation methods</strong> and
         compare them by input type, solver, complexity, maturity, domain, and
         assumptions.
