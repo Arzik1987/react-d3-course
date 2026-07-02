@@ -1,5 +1,24 @@
-import { useState } from 'react'
 import Card from './Card'
+
+const inputTagStyles = {
+  score: {
+    background: '#E8F7EE',
+    color: '#1E6B3A',
+  },
+  rank: {
+    background: '#EAF2FF',
+    color: '#1D4ED8',
+  },
+  pairwise: {
+    background: '#FFF1E8',
+    color: '#B45309',
+  },
+}
+
+const defaultTagStyle = {
+  background: '#F3F4F6',
+  color: '#374151',
+}
 
 export default function App() {
   const pageStyle = {
@@ -25,44 +44,24 @@ export default function App() {
     <main style={pageStyle}>
       <section style={cardsStyle}>
         {aggregationMethods.map((method) => (
-      <Card
-        key={method.id}
-        title={method.name}
-        tag={method.input}
-        tagStyle={inputTagStyles[method.input] ?? defaultTagStyle}
-        metaTags={[
-          method.solver,
-          method.complexity,
-          method.maturity,
-          method.domain,
-          method.assumption,
-        ]}
-      />
-    ))}
+          <Card
+            key={method.id}
+            title={method.name}
+            tag={method.input}
+            tagStyle={inputTagStyles[method.input] ?? defaultTagStyle}
+            metaTags={[
+              method.solver,
+              method.complexity,
+              method.maturity,
+              method.domain,
+              method.assumption,
+            ]}
+          />
+        ))}
       </section>
     </main>
   )
 }
-
-  const inputTagStyles = {
-    score: {
-      background: '#E8F7EE',
-      color: '#1E6B3A',
-    },
-    rank: {
-      background: '#EAF2FF',
-      color: '#1D4ED8',
-    },
-    pairwise: {
-      background: '#FFF1E8',
-      color: '#B45309',
-    },
-  }
-
-  const defaultTagStyle = {
-    background: '#F3F4F6',
-    color: '#374151',
-  }
 
 const aggregationMethods = [
   {
