@@ -13,10 +13,10 @@ export default function App() {
 
   const cardsStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 2fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 2fr))',
     gap: 24,
     width: '100%',
-    maxWidth: 1100,
+    maxWidth: 1000,
     margin: '0 auto',
     boxSizing: 'border-box',
   }

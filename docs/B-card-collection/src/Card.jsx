@@ -22,7 +22,7 @@ const styles = {
     },
     text: {
         margin: '0 0 18px',
-        fontSize: 16,
+        fontSize: 14,
         lineHeight: 1.6,
         color: '#52606d',
     },
@@ -31,13 +31,13 @@ const styles = {
         display: 'inline-block',
         padding: '6px 12px',
         borderRadius: 9999,
-        fontSize: 16,
+        fontSize: 14,
     },
     tagsRow: {
         marginTop: 'auto',
         display: 'flex',
-        flexWrap: 'wrap',
-        gap: 8,
+        flexDirection: 'column',
+        gap: 6,
         alignItems: 'flex-start',
     },
     metaTag: {
@@ -47,7 +47,7 @@ const styles = {
         backgroundColor: 'rgba(255, 255, 255, 0.78)',
         color: '#1f2933',
         border: '1px solid rgba(31, 41, 51, 0.12)',
-        fontSize: 16,
+        fontSize: 14,
   },
 }
 
