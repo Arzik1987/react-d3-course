@@ -1,49 +1,187 @@
-import Card from './Card'
+import Card from "./Card";
+import { useState } from "react";
 
 const inputTagStyles = {
   score: {
-    background: '#E8F7EE',
-    color: '#1E6B3A',
+    background: "#E8F7EE",
+    color: "#1E6B3A",
   },
   rank: {
-    background: '#EAF2FF',
-    color: '#1D4ED8',
+    background: "#EAF2FF",
+    color: "#1D4ED8",
   },
   pairwise: {
-    background: '#FFF1E8',
-    color: '#B45309',
+    background: "#FFF1E8",
+    color: "#B45309",
   },
-}
+};
 
 const defaultTagStyle = {
-  background: '#F3F4F6',
-  color: '#374151',
-}
+  background: "#F3F4F6",
+  color: "#374151",
+};
 
 export default function App() {
-  const pageStyle = {
-    minHeight: '100vh',
-    width: '100%',
-    boxSizing: 'border-box',
-    padding: '16px',
-    background:
-      'radial-gradient(circle at top left, rgba(196, 73, 0, 0.16), transparent 28%), radial-gradient(circle at bottom right, rgba(15, 76, 129, 0.14), transparent 26%), linear-gradient(180deg, #f9f6ef 0%, #f6f2e8 100%)',
+  const [inputButtons, setInputButtons] = useState({
+    score: true,
+    rank: true,
+    pairwise: true,
+  });
+
+  function toggleInputButton(input) {
+    setInputButtons((current) => ({
+      ...current,
+      [input]: !current[input],
+    }));
   }
 
-  const cardsStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 2fr))',
-    gap: 24,
-    width: '100%',
+  const pageStyle = {
+    minHeight: "100vh",
+    width: "100%",
+    boxSizing: "border-box",
+    padding: "16px",
+    background:
+      "radial-gradient(circle at top left, rgba(196, 73, 0, 0.16), transparent 28%), radial-gradient(circle at bottom right, rgba(15, 76, 129, 0.14), transparent 26%), linear-gradient(180deg, #f9f6ef 0%, #f6f2e8 100%)",
+  };
+
+  const titleStyle = {
+    margin: "0 auto 24px",
+    width: "100%",
     maxWidth: 1000,
-    margin: '0 auto',
-    boxSizing: 'border-box',
-  }
+    fontSize: 40,
+    lineHeight: 1.1,
+    color: "#1f2933",
+    fontFamily: 'Georgia, "Times New Roman", serif',
+    textAlign: "center",
+  };
+
+  const cardsStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 2fr))",
+    gap: 24,
+    width: "100%",
+    maxWidth: 1000,
+    margin: "0 auto",
+    boxSizing: "border-box",
+  };
+
+  const introStyle = {
+    margin: "0 auto 28px",
+    width: "100%",
+    maxWidth: 1000,
+    fontSize: 16,
+    lineHeight: 1.6,
+    color: "#3e4c59",
+    fontFamily: 'Georgia, "Times New Roman", serif',
+  };
+
+  const filterRowStyle = {
+    width: "100%",
+    maxWidth: 1000,
+    margin: "0 auto 28px",
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    flexWrap: "wrap",
+  };
+
+  const filterLabelStyle = {
+    color: "#3e4c59",
+    fontSize: 16,
+    fontFamily: 'Georgia, "Times New Roman", serif',
+  };
+
+  const filterButtonBaseStyle = {
+    border: "none",
+    borderRadius: 9999,
+    padding: "6px 12px",
+    fontSize: 16,
+    fontFamily: 'Georgia, "Times New Roman", serif',
+    cursor: "pointer",
+  };
+
+  const deselectedButtonStyle = {
+    background: "#F8F5EE",
+    color: "#7b8794",
+    border: "1px solid #cbd2d9",
+  };
+
+  const visibleMethods = aggregationMethods.filter(
+    (method) => inputButtons[method.input],
+  );
 
   return (
     <main style={pageStyle}>
+      <h1 style={titleStyle}>Aggregation Methods</h1>
+      <p style={introStyle}>
+        How to draw a conclusion from{" "}
+        <strong>multiple benchmark experiments</strong>? Imagine multiple
+        competitors, say LLMs, are evaluated across multiple datasets, for
+        example coding assignments. Some models perform better on some
+        instances, others on different ones. So what is the
+        <strong> overall ranking of candidates</strong>, and which one is the
+        winner? It turns out there are several dozen ways to answer this
+        question, and they are not always consistent with each other. This page
+        lists the ones I found and implemented with the help of Codex. You can
+        browse the collection of <strong>aggregation methods</strong> and
+        compare them by input type, solver, complexity, maturity, domain, and
+        assumptions.
+      </p>
+      <div style={filterRowStyle}>
+        <span style={filterLabelStyle}>
+          <strong>Filter by input:</strong>
+        </span>
+
+        <button
+          type="button"
+          onClick={() => toggleInputButton("score")}
+          style={{
+            ...filterButtonBaseStyle,
+            ...(inputButtons.score
+              ? {
+                  ...inputTagStyles.score,
+                  border: `1px solid ${inputTagStyles.score.color}`,
+                }
+              : deselectedButtonStyle),
+          }}
+        >
+          score
+        </button>
+
+        <button
+          type="button"
+          onClick={() => toggleInputButton("rank")}
+          style={{
+            ...filterButtonBaseStyle,
+            ...(inputButtons.rank
+              ? {
+                  ...inputTagStyles.rank,
+                  border: `1px solid ${inputTagStyles.rank.color}`,
+                }
+              : deselectedButtonStyle),
+          }}
+        >
+          rank
+        </button>
+
+        <button
+          type="button"
+          onClick={() => toggleInputButton("pairwise")}
+          style={{
+            ...filterButtonBaseStyle,
+            ...(inputButtons.pairwise
+              ? {
+                  ...inputTagStyles.pairwise,
+                  border: `1px solid ${inputTagStyles.pairwise.color}`,
+                }
+              : deselectedButtonStyle),
+          }}
+        >
+          pairwise
+        </button>
+      </div>
       <section style={cardsStyle}>
-        {aggregationMethods.map((method) => (
+        {visibleMethods.map((method) => (
           <Card
             key={method.id}
             title={method.name}
@@ -60,7 +198,7 @@ export default function App() {
         ))}
       </section>
     </main>
-  )
+  );
 }
 
 const aggregationMethods = [
