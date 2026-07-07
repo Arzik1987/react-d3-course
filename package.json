@@ -9,5 +9,8 @@
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "shx": "^0.4.0"
+  },
+  "dependencies": {
+    "d3": "^7.9.0"
   }
 }
