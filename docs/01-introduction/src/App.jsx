@@ -26,7 +26,14 @@ export const Barplot = ({ data }) => {
     .range([0, innerWidth]);
 
   return (
-    <svg width={width} height={height} role="img" aria-label="Students by country">
+    <svg
+      className="chart"
+      viewBox={`0 0 ${width} ${height}`}
+      width={width}
+      height={height}
+      role="img"
+      aria-label="Students by country"
+    >
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {data.map((d) => {
           const y = yScale(d.country) ?? 0;
@@ -96,8 +103,17 @@ function App() {
   ];
 
   return (
-    <main>
-      <Barplot data={data} />
+    <main className="page">
+      <span className="eyebrow">Course Work</span>
+      <h2>Introduction</h2>
+      <p className="lede">
+        First React D3 assignment exploring a simple bar chart of student counts by country.
+      </p>
+      <section className="chart-card">
+        <div className="chart-frame">
+          <Barplot data={data} />
+        </div>
+      </section>
     </main>
   );
 }
