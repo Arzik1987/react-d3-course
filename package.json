@@ -4,6 +4,9 @@
     "build:01": "npm --prefix docs/01-introduction run build",
     "build:b": "npm --prefix docs/B-card-collection run build",
     "assemble:pages": "shx rm -rf .pages && shx mkdir -p .pages/A-homepage .pages/B-card-collection .pages/01-introduction && shx cp docs/index.html .pages/index.html && shx cp docs/styles.css .pages/styles.css && shx cp -r docs/A-homepage/* .pages/A-homepage/ && shx cp -r docs/B-card-collection/dist/* .pages/B-card-collection/ && shx cp -r docs/01-introduction/dist/* .pages/01-introduction/",
+    "build": "npm run build:01 && npm run build:b && npm run assemble:pages",
+    "prepare:preview": "npm run build && shx rm -rf .preview && shx mkdir -p .preview/react-d3-course && shx cp -r .pages/* .preview/react-d3-course/",
+    "dev": "npm run prepare:preview && python3 -m http.server 4173 --directory .preview",
     "deploy": "npm run build:01 && npm run build:b && npm run assemble:pages && gh-pages -d .pages"
   },
   "devDependencies": {
